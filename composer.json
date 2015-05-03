@@ -1,0 +1,17 @@
+{
+    "name": "VytorCalixto/Phalcon-REST-Trabis",
+    "description": "Example of Phalcon REST API testing with travis",
+    "keywords": ["php", "ufpr", "rest", "api", "travis", "ci"],
+    "authors": [
+        {
+            "name": "Vytor Calixto"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "~5.0",
+        "phpunit/phpunit": "4.6.*"
+    }
+}

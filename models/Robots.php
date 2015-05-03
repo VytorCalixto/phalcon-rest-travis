@@ -7,6 +7,11 @@ use Phalcon\Mvc\Model\Validator\InclusionIn;
 
 class Robots extends Model
 {
+    
+    public $id;
+    public $name;
+    public $type;
+    public $year;
 
     public function validation()
     {

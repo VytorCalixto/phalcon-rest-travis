@@ -31,7 +31,7 @@ $app = new Micro($di);
 
 //Retrieves all robots
 $app->get('/api/robots', function() use ($app) {
-    $phql = "SELECT * FROM Robots ORDER BY name";
+    $phql = "SELECT * FROM Robots";
     $robots = $app->modelsManager->executeQuery($phql);
 
     $data = array();
@@ -137,7 +137,7 @@ $app->post('/api/robots', function() use ($app){
 });
 
 //Updates robots based on primary key
-$app->put('/api/robots/{id:[0-9]+}', function() use ($app) {
+$app->put('/api/robots/{id:[0-9]+}', function($id) use ($app) {
     $robot = $app->request->getJsonRawBody();
 
     $phql = "UPDATE Robots SET name = :name:, type = :type:, year = :year: WHERE id = :id:";
@@ -171,7 +171,7 @@ $app->put('/api/robots/{id:[0-9]+}', function() use ($app) {
 });
 
 //Deletes robots based on primary key
-$app->delete('/api/robots/{id:[0-9]+}', function() use ($app) {
+$app->delete('/api/robots/{id:[0-9]+}', function($id) use ($app) {
     $phql = "DELETE FROM Robots WHERE id = :id:";
     $status = $app->modelsManager->executeQuery($phql, array(
         'id' => $id
