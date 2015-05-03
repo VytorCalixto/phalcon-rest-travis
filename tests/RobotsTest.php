@@ -15,6 +15,9 @@ class MateriaTest extends PHPUnit_Framework_TestCase {
         
         $this->assertEquals(200, $response->getStatusCode());
         
+        var_dump($response);
+        var_dump($response->getBody());
+        
         $data = $response->json();
         $this->assertInternalType('array', $data);
         $this->assertEquals(6, count($data));
