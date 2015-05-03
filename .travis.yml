@@ -1,0 +1,17 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+
+before_script:
+  - mysql < robots.sql
+  - sed -s 's/https:\/\/phalcon-rest-travis-vytorcalixto.c9.io/http:\/\/localhost/' -i tests/*
+  - sed -s 's/getenv("IP")/"localhost"/' -i index.php
+  - sed -s 's/"vytorcalixto"/"root"/' -i index.php
+  - git clone -q https://github.com/phalcon/cphalcon.git
+  - (cd cphalcon/ext; export CFLAGS="-g3 -O1 -std=gnu90 -Wall -Werror -Wno-error=uninitialized"; phpize && ./configure --silent --enable-phalcon && make --silent -j4 > /dev/null && sudo make --silent install && phpenv config-add ../unit-tests/ci/phalcon.ini)
+  - wget http://getcomposer.org/composer.phar
+  - php composer.phar self-update
+  - php composer.phar install
+  - php -i | grep phalcon

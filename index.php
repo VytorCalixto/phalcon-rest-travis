@@ -14,12 +14,11 @@ $loader->registerDirs(array(
 ))->register();
 
 $di = new FactoryDefault();
-
 //Set up the database service
 $di->set('db', function(){
     return new PdoMysql(array(
-        "host"      => getenv('IP'),
-        "username"  => getenv('C9_USER'),
+        "host"      => getenv("IP"),
+        "username"  => "vytorcalixto",
         "password"  => "",
         "dbname"    => "robotsDB",
         "charset"   => "utf8"
