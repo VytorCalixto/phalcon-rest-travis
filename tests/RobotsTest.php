@@ -5,7 +5,7 @@ class MateriaTest extends PHPUnit_Framework_TestCase {
     
     protected function setUp(){
         $this->client = new GuzzleHttp\Client(array(
-            "base_url"  => "https://phalcon-rest-travis-vytorcalixto.c9.io",
+            "base_url"  => $GLOBALS['base_url'],
             "defaults"  => ["exceptions" => false]
         ));
     }
@@ -14,10 +14,6 @@ class MateriaTest extends PHPUnit_Framework_TestCase {
         $response = $this->client->get("/api/robots");
         
         $this->assertEquals(200, $response->getStatusCode());
-        
-        var_dump($response);
-        var_dump($response->getBody());
-        echo $response->getBody();
         
         $data = $response->json();
         $this->assertInternalType('array', $data);
