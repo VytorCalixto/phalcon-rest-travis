@@ -82,14 +82,15 @@ class MateriaTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testUpdateRobot(){
-        $lastId = end($this->client->get("/api/robots")->json())['id'];
+        $robots = $this->client->get("/api/robots")->json();
+        $lastRobot = end($robots);
         $robot = array(
-            "id"    => $lastId,
+            "id"    => $lastRobot['id'],
             "name"  => "bb-800", 
             "type"  => "droid",
             "year"  => 2015
         );
-        $response = $this->client->put("/api/robots/".$lastId, array(
+        $response = $this->client->put("/api/robots/".$lastRobot['id'], array(
             "json" => $robot
         ));
         
@@ -119,8 +120,9 @@ class MateriaTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testDeleteRobot(){
-        $lastId = end($this->client->get("/api/robots")->json())['id'];
-        $response = $this->client->delete("/api/robots/".$lastId);
+        $robots = $this->client->get("/api/robots")->json();
+        $lastRobot = end($robots);
+        $response = $this->client->delete("/api/robots/".$lastRobot['id']);
         
         $this->assertEquals(200, $response->getStatusCode());
         $data = $response->json();
